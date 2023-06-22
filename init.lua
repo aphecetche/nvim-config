@@ -18,7 +18,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 -- Set leader(s)
 --
-vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+vim.g.mapleader = "," -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 -- install plugins
 --   using a directory (./lua/plugins, simply referenced as 'plugins', the lua prefix is implied) 
@@ -30,4 +30,4 @@ require('lazy').setup('plugins')
 vim.cmd.colorscheme('catppuccin-mocha')
 
 -- TODO: how to unmap a key with lua ? 
-vim.cmd("source netrw.vim")
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/netrw.vim')
