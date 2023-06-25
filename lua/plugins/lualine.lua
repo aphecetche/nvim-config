@@ -1,14 +1,11 @@
-return {
-	--   { "RRethy/nvim-base16" },
+local M = 
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		--      init = function()
-		--	      require("lazy").load({plugins={"nvim-base16"}})
-		--      end,
-		opts = function()
-			return {
+}
+
+M.opts = {
 				options = {
 					icons_enabled = true,
 					-- theme = 'base16',
@@ -50,7 +47,6 @@ return {
 				winbar = {},
 				inactive_winbar = {},
 				extensions = {},
-			}
-		end,
-	},
-}
+        }
+
+return M
