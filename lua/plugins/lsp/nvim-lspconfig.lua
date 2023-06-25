@@ -26,7 +26,6 @@ local function setup_lua_ls(lspconfig)
                         },
                 },
         })
-        vim.print("lua_ls=", lua_ls) --.default_capabilities())
 end
 
 local M = {
@@ -41,8 +40,6 @@ local M = {
 M.config = function()
         local lspconfig = require("lspconfig")
         local lsp_defaults = lspconfig.util.default_config
-
-        vim.print(lsp_defaults.capabilities)
 
         vim.lsp.set_log_level("debug")
 
