@@ -1,4 +1,3 @@
-local api = vim.api
-
-api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", {})
-api.nvim_set_keymap("n", "<leader>F", ":lua vim.lsp.buf.range_formatting()<CR>", {})
+-- here should put general keymaps
+-- note that keymaps that do depend on LSP capabilites (e.g. formatting)
+-- are to be found under autocmds instead

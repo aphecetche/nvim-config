@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.number = true
+opt.number = true -- show line numbers
 opt.tabstop = 4 -- number of visual spaces per TAB (\t)
 opt.expandtab = true -- TABs are spaces
 
@@ -9,4 +9,3 @@ opt.smartcase = true -- case-sensitive if expression contains a capital letter
 
 opt.path:append(vim.fn.getcwd() .. "/**")
 
-opt.completeopt = {'menu', 'menuone', 'noselect'}

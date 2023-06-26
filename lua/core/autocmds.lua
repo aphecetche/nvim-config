@@ -1,8 +1,5 @@
-local api = vim.api
+-- LSP keymapping
 
--- format on write
-
--- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP actions",
         callback = function(args)
@@ -13,50 +10,64 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-                -- create format on write autocmd only if LSP server actually suppors formatting (on full file)
                 if client.server_capabilities.documentFormattingProvider then
-                        local FormatOnWriteGroup = api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
-                        api.nvim_create_autocmd("BufWritePre", {
+                        local FormatOnWriteGroup = vim.api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
+                        -- create format on write autocmd only if LSP server actually support formatting
+                        vim.api.nvim_create_autocmd("BufWritePre", {
                                 command = "silent! lua vim.lsp.buf.format()",
                                 pattern = "*.lua",
                                 group = FormatOnWriteGroup,
                         })
+                        vim.api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", {})
                 end
 
-                -- Displays hover information about the symbol under the cursor
-                bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-
-                -- Jump to the definition
-                bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-
-                -- Jump to declaration
-                bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-
-                -- Lists all the implementations for the symbol under the cursor
-                bufmap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-
-                -- Jumps to the definition of the type symbol
-                bufmap("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-
-                -- Lists all the references
-                bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-
-                -- Displays a function's signature information
-                bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-
-                -- Renames all references to the symbol under the cursor
-                bufmap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-
-                -- Selects a code action available at the current cursor position
-                bufmap("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-                bufmap("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
-                -- Show diagnostics in a floating window
-                bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-
-                -- Move to the previous diagnostic
-                bufmap("n", ">d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-
-                -- Move to the next diagnostic
-                bufmap("n", "<d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+                if client.server_capabilities.documentRangeFormattingProvider then
+                        vim.api.nvim_set_keymap("n", "<leader>F", ":lua vim.lsp.buf.range_formatting()<CR>", {})
+                end
+                if client.server_capabilities.hoverProvider then
+                        -- Displays hover information about the symbol under the cursor
+                        bufmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+                end
+                if client.server_capabilities.definitionProvider then
+                        -- Jump to the definition
+                        bufmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+                end
+                if client.server_capabilities.declarationProvider then
+                        -- Jump to declaration
+                        bufmap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+                end
+                if client.server_capabilities.implementationProvider then
+                        -- Lists all the implementations for the symbol under the cursor
+                        bufmap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
+                end
+                if client.server_capabilities.typeDefinitionProvider then
+                        -- Jumps to the definition of the type symbol
+                        bufmap("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+                end
+                if client.server_capabilities.referencesProvider then
+                        -- Lists all the references
+                        bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
+                end
+                if client.server_capabilities.signatureProvider then
+                        -- Displays a function's signature information
+                        bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+                end
+                if client.server_capabilities.renameProvider then
+                        -- Renames all references to the symbol under the cursor
+                        bufmap("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
+                end
+                if client.server_capabilities.codeActionProvider then
+                        -- Selects a code action available at the current cursor position
+                        bufmap("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+                        bufmap("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
+                end
+                if client.server_capabilities.diagnosticProvider then
+                        -- Show diagnostics in a floating window
+                        bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+                        -- Move to the previous diagnostic
+                        bufmap("n", ">d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+                        -- Move to the next diagnostic
+                        bufmap("n", "<d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+                end
         end,
 })

@@ -1,6 +1,20 @@
+local function setup_clangd(lspconfig)
+        if not lspconfig.clangd then
+                return
+        end
+        lspconfig.clangd.setup({
+                on_attach = function()
+                        -- make it buffer local keymap so it's only defined for cpp buffers !
+                        vim.keymap.set('n', '<leader>a', "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = true })
+                end
+        })
+end
+
 local function setup_lua_ls(lspconfig)
-        local lua_ls = lspconfig.lua_ls
-        lua_ls.setup({
+        if not lspconfig.lua_ls then
+                return
+        end
+        lspconfig.lua_ls.setup({
                 settings = {
                         Lua = {
                                 runtime = {
@@ -43,12 +57,15 @@ M.config = function()
 
         vim.lsp.set_log_level("debug")
 
-        -- local has_cmp_nvim_lsp, _ = pcall(require, "cmp_nvim_lsp")
-        -- if has_cmp_nvim_lsp then
-        --   lsp_defaults.capabilities =
-        --     vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
-        -- end
         setup_lua_ls(lspconfig)
+        setup_clangd(lspconfig)
+
+        local has_cmp_nvim_lsp, _ = pcall(require, "cmp_nvim_lsp")
+        if has_cmp_nvim_lsp then
+                lsp_defaults.capabilities =
+                    vim.tbl_deep_extend("force", lsp_defaults.capabilities,
+                            require("cmp_nvim_lsp").default_capabilities())
+        end
 end
 
 return M

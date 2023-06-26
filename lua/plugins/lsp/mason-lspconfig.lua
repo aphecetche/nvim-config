@@ -7,9 +7,8 @@ M.config = function()
         local mason_lspconfig = require("mason-lspconfig")
         local opts = {
                 ensure_installed = {
-                        "clangd", -- idem
+                        "clangd",
                         "lua_ls",
-                        -- "flake8",
                 },
         }
         mason_lspconfig.setup(opts)

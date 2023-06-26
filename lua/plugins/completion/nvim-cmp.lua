@@ -14,7 +14,6 @@ local M = {
 M.opts = function()
         print("setup_cmp")
         local cmp = require("cmp")
-        local select_opts = { behavior = cmp.SelectBehavior.Select }
         return {
                 completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
                 experimental = { native_menu = false, ghost_text = false },
@@ -33,7 +32,9 @@ M.opts = function()
                         ["<C-f>"] = cmp.mapping.scroll_docs(4),
                         ['<C-Space>'] = cmp.mapping.complete(),
                         ["<C-e>"] = cmp.mapping.abort(),
-                        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                        -- Accept currently selected item.
+                        -- Set `select` to `false` to only confirm explicitly selected items.
+                        ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = cmp.config.sources({
                         { name = "path" },
