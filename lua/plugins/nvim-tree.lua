@@ -4,7 +4,17 @@ return {
         dependencies = {
                 "nvim-tree/nvim-web-devicons",
         },
-        config = function()
-                require("nvim-tree").setup {}
-        end,
+        opts = function()
+                return {
+                        view = {
+                                side = "left"
+                        },
+                        actions = {
+                                open_file = {
+                                        quit_on_open = true
+                                }
+                        }
+
+                }
+        end
 }

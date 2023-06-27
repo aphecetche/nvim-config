@@ -10,6 +10,13 @@ local function setup_clangd(lspconfig)
         })
 end
 
+local function setup_julials(lspconfig)
+        if not lspconfig.julials then
+                return
+        end
+        lspconfig.julials.setup({})
+end
+
 local function setup_lua_ls(lspconfig)
         if not lspconfig.lua_ls then
                 return
@@ -59,6 +66,7 @@ M.config = function()
 
         setup_lua_ls(lspconfig)
         setup_clangd(lspconfig)
+        setup_julials(lspconfig)
 
         local has_cmp_nvim_lsp, _ = pcall(require, "cmp_nvim_lsp")
         if has_cmp_nvim_lsp then

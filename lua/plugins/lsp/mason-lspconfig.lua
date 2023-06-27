@@ -9,6 +9,7 @@ M.config = function()
                 ensure_installed = {
                         "clangd",
                         "lua_ls",
+                        "julials"
                 },
         }
         mason_lspconfig.setup(opts)
