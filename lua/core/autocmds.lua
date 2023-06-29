@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                                 pattern = "*.lua",
                                 group = FormatOnWriteGroup,
                         })
-                        vim.api.nvim_set_keymap("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", {})
+                        vim.keymap.set("n", "<leader>f", require("core.functions").format, {})
                 end
 
                 if client.server_capabilities.documentRangeFormattingProvider then
