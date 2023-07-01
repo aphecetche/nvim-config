@@ -22,7 +22,8 @@ local function nullSources()
                         end,
                         -- filetypes = { "js", "ts", "tsx", "css" }
                 }),
-                builtins.formatting.jq.with({ filetypes = { "json", "httpResult" } })
+                builtins.formatting.jq.with({ filetypes = { "json", "httpResult" } }),
+                builtins.code_actions.gitsigns,
         }
 end
 
