@@ -77,7 +77,8 @@ return {
                 event = "BufReadPost",
                 opts = {
                         provider_selector = function(_, ft, _)
-                                local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css" }
+                                local lspWithOutFolding = { "markdown", "bash", "sh", "bash", "zsh", "css", "json",
+                                        "httpResult" }
                                 if vim.tbl_contains(lspWithOutFolding, ft) then
                                         return { "treesitter", "indent" }
                                 else

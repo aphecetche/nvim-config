@@ -6,20 +6,6 @@ local lspServers = {
         "tsserver",
 }
 
---------------------------------------------------------------------------------
--- SETUP ALL LSP
--- enable capabilities for plugins
-local lspCapabilities = vim.lsp.protocol.make_client_capabilities()
-
--- Enable snippets-completion (for nvim_cmp)
-lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
-
--- Enable folding (for nvim-ufo)
-lspCapabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-}
-
 return {
         { -- package manager
                 "williamboman/mason.nvim",

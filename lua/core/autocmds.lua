@@ -3,6 +3,8 @@
 vim.api.nvim_create_autocmd("LspAttach", {
         desc = "LSP actions",
         callback = function(args)
+                -- vim.notify(vim.fn.printf("LspAttach for client %s %d", client.name, client.id), vim.log.levels.DEBUG)
+
                 local bufmap = function(mode, lhs, rhs)
                         local opts = { buffer = true }
                         vim.keymap.set(mode, lhs, rhs, opts)
