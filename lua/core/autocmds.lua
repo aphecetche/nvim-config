@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                         -- create format on write autocmd only if LSP server actually support formatting
                         vim.api.nvim_create_autocmd("BufWritePre", {
                                 command = "silent! lua vim.lsp.buf.format()",
-                                pattern = "*.lua",
+                                -- pattern = "*.lua",
                                 group = FormatOnWriteGroup,
                         })
                         vim.keymap.set("n", "<leader>f", require("core.functions").format, {})

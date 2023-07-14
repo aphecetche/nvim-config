@@ -6,10 +6,19 @@ return {
         opts = {
                 ensure_installed = { "http", "json" },
                 highlight = {
-                        enable = true
+                        enable = true,
+                        disable = function(lang, bufnr)
+                                -- Disable in large json buffers
+                                -- return lang == "json" and vim.fn.getfsize(vim.fn.expand('%')) > 1024
+                                return lang == "json"
+                                -- return false
+                        end,
                 },
                 indentation = {
                         enable = true,
+                        disable = function(lang, bufnr)
+                                return lang == "json"
+                        end,
                 }
         }
 }

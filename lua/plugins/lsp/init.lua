@@ -4,6 +4,7 @@ local lspServers = {
         "julials",
         "lua_ls",
         "tsserver",
+        "yamlls"
 }
 
 return {

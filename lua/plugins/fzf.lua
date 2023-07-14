@@ -1,10 +1,20 @@
+local opts = {
+        winopts = {
+                preview = {
+                        -- do not show the preview window
+                        hidden = "hidden"
+                }
+        }
+}
+
 local M = {
         "ibhagwan/fzf-lua",
         dependencies = {
                 "nvim-tree/nvim-web-devicons",
                 { "junegunn/fzf", build = "./install --bin" },
         },
-        keys = { { "<c-p>", function() require("fzf-lua").files() end, } },
+        opts = opts,
+        keys = { { "<c-p>", function() require("fzf-lua").files(opts) end, } },
         cmd = { "Rg", "FzfLua" }
 }
 
