@@ -10,44 +10,31 @@ lspCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Enable folding (for nvim-ufo)
 lspCapabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
+    dynamicRegistration = false,
+    lineFoldingOnly = true,
 }
 
-local function notify_on_attach(client, bufnr)
-        -- vim.notify(vim.fn.printf("[on_attach(%s,%d)]", client.name, bufnr), vim.log.levels.DEBUG)
-end
-
 M.setup = function(lspServers)
-        -- INFO must be before the lsp-config setup of lua-ls
-        require("neodev").setup {
-                -- plugins are helpful e.g. for plenary, but slow down lsp loading
-                library = { plugins = false },
-        }
+    -- INFO must be before the lsp-config setup of lua-ls
+    require("neodev").setup {
+        -- plugins are helpful e.g. for plenary, but slow down lsp loading
+        library = { plugins = false },
+    }
 
-        -- vim.print("lspCapabilities=", lspCapabilities)
+    for _, lsp in pairs(lspServers) do
+        local config = require("plugins.lsp." .. lsp)
+        config.capabilities = lspCapabilities
+        require("lspconfig")[lsp].setup(config)
+    end
 
-        for _, lsp in pairs(lspServers) do
-                local config = require("plugins.lsp." .. lsp)
-                config.capabilities = lspCapabilities
-                local on_attach = config.on_attach
-                config.on_attach = function(client, bufnr)
-                        notify_on_attach(client, bufnr)
-                        if on_attach then
-                                on_attach(client, bufnr)
-                        end
-                end
-                require("lspconfig")[lsp].setup(config)
+    local notify = vim.notify
+    vim.notify = function(msg, ...)
+        if msg:match("warning: multiple different client offset_encodings") then
+            return
         end
 
-        local notify = vim.notify
-        vim.notify = function(msg, ...)
-                if msg:match("warning: multiple different client offset_encodings") then
-                        return
-                end
-
-                notify(msg, ...)
-        end
+        notify(msg, ...)
+    end
 end
 
 return M

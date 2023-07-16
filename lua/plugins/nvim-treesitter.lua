@@ -4,7 +4,19 @@ return {
         main = "nvim-treesitter.configs",
         build = function() require("nvim-treesitter.install").update({ with_sync = true }) end,
         opts = {
-                ensure_installed = { "http", "json", "yaml" },
+                ensure_installed = {
+                        "bash",
+                        "http",
+                        "lua",
+                        "css",
+                        "go",
+                        "javascript",
+                        "json",
+                        "markdown",
+                        "tsx",
+                        "typescript",
+                        "yaml",
+                },
                 highlight = {
                         enable = true,
                         disable = function(lang, bufnr)

@@ -39,7 +39,7 @@ safeRequire("core.autocmds")
 safeRequire("core.options")
 
 -- my commands
-safeRequire("core.commands")
+-- safeRequire("core.commands")
 
 -- choose a colorscheme
 vim.cmd.colorscheme("monokai-pro-spectrum")
