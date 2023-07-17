@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.buf.range_format({ formatting_options = client.config.formatting_options })
         end
 
-        vim.notify(vim.fn.printf("LspAttach for client %s %d", client.name, client.id), vim.log.levels.DEBUG)
+        print(vim.fn.printf("LspAttach for client %s %d", client.name, client.id))
 
         -- if client.config.on_attach then
         --     client.config.on_attach(client, args.buf)
@@ -26,15 +26,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- vim.print(client.config.formatting_options)
         -- vim.print(client.server_capabilities)
         --        vim.print(client.config)
+        local bufname = vim.api.nvim_buf_get_name(0)
+
         if client.server_capabilities.documentFormattingProvider then
-            vim.notify(vim.fn.printf("setting up formatting for %s", client.name))
-            local FormatOnWriteGroup = vim.api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
-            -- create format on write autocmd only if LSP server actually support formatting
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                callback = format,
-                -- pattern = "*.lua",
-                group = FormatOnWriteGroup,
-            })
+            print(vim.fn.printf("setting up formatting for %s (buffer %s)", client.name, bufname))
+            if not string.match(string.lower(bufname), "km3net") then
+                print(vim.fn.printf("setting up save on write for buffer %s", bufname))
+                local FormatOnWriteGroup = vim.api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
+                -- create format on write autocmd only if LSP server actually support formatting
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    callback = format,
+                    -- pattern = "*.lua",
+                    group = FormatOnWriteGroup,
+                })
+            end
             vim.api.nvim_buf_create_user_command(0, "Format", format, {})
             vim.keymap.set("n", "<leader>f", format, { desc = "format buffer", buffer = true })
         end
