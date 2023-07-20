@@ -8,7 +8,7 @@ After some fooling around, I came to this repo :
 
 from which I took a lot of inspiration... (with some names I prefer, e.g. for `config` I use `core`)
 
-
+## Important files
 
 
 

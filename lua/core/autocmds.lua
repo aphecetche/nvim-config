@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("FileType", {
             wk.register({
                 m = {
                     name = "Markdown",
-                    v = { "<cmd>!open -a Marked\\ 2.app '%:p'<cr>", "Open in Marked 2" }
+                    v = { "<cmd>silent !open -a Marked\\ 2.app '%:p'<cr>", "Open in Marked 2" }
                 },
 
             }, { prefix = "<leader>" })
@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             vim.lsp.buf.range_format({ formatting_options = client.config.formatting_options })
         end
 
-        print(vim.fn.printf("LspAttach for client %s %d", client.name, client.id))
+        -- print(vim.fn.printf("LspAttach for client %s %d", client.name, client.id))
 
         -- if client.config.on_attach then
         --     client.config.on_attach(client, args.buf)
@@ -68,9 +68,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local bufname = vim.api.nvim_buf_get_name(0)
 
         if client.server_capabilities.documentFormattingProvider then
-            print(vim.fn.printf("setting up formatting for %s (buffer %s)", client.name, bufname))
+            -- print(vim.fn.printf("setting up formatting for %s (buffer %s)", client.name, bufname))
             if not string.match(string.lower(bufname), "km3net") then
-                print(vim.fn.printf("setting up save on write for buffer %s", bufname))
+                -- print(vim.fn.printf("setting up save on write for buffer %s", bufname))
                 local FormatOnWriteGroup = vim.api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
                 -- create format on write autocmd only if LSP server actually support formatting
                 vim.api.nvim_create_autocmd("BufWritePre", {
