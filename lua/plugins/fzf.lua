@@ -20,7 +20,7 @@ local M = {
 
 M.config = function()
     vim.api.nvim_create_user_command("Rg", function(opts)
-        require("fzf-lua").grep({ search = opts.fargs[1] })
+        require("fzf-lua").grep({ search = table.concat(opts.fargs, " ") })
     end, { nargs = "*" })
     local wk = require("which-key")
     local fzf = require("fzf-lua")
