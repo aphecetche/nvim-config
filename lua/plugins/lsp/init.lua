@@ -8,7 +8,8 @@ local lspServers = {
     "jsonls",
     "marksman",
     "pylsp",
-    "fortls"
+    "fortls",
+    "cssls"
 }
 
 return {
