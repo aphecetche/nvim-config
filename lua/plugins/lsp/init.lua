@@ -15,7 +15,6 @@ local lspServers = {
 return {
     { -- package manager
         "williamboman/mason.nvim",
-        lazy = true,
         opts = {
             ui = {
                 border = "rounded",
@@ -25,13 +24,13 @@ return {
     },
     { -- auto-install lsp servers
         "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
+        --  event = "VeryLazy",
         dependencies = "williamboman/mason.nvim",
         opts = { ensure_installed = lspServers },
     },
     { -- configure LSPs
         "neovim/nvim-lspconfig",
-        lazy = false,
+        event = { "BufReadPre", "BufNewFile" },
         priority = 1000,
         dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
         init = function()

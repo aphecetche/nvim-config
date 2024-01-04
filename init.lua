@@ -10,15 +10,15 @@ vim.g.mapleader          = ","
 ---loaded, but do notify if there was an error.
 ---@param module string module to load
 local function safeRequire(module)
-        local success, _ = pcall(require, module)
-        if success then return end
-        local msg = "Error loading " .. module
-        local notifyLoaded, _ = pcall(require, "notify")
-        if notifyLoaded then
-                vim.notify(" " .. msg, vim.log.levels.ERROR)
-        else
-                vim.cmd(('echohl Error | echo "%s" | echohl None'):format(msg))
-        end
+    local success, _ = pcall(require, module)
+    if success then return end
+    local msg = "Error loading " .. module
+    local notifyLoaded, _ = pcall(require, "notify")
+    if notifyLoaded then
+        vim.notify(" " .. msg, vim.log.levels.ERROR)
+    else
+        vim.cmd(('echohl Error | echo "%s" | echohl None'):format(msg))
+    end
 end
 
 -- Install package manager
@@ -27,7 +27,14 @@ safeRequire("core.install-lazy")
 -- install plugins
 --   using a directory (./lua/plugins, simply referenced as 'plugins',
 --   the lua prefix is implied) where all *.lua files will be merged by lazy
-require("lazy").setup("plugins")
+require("lazy").setup({ import = "plugins" }, { import = "plugins.lsp" },
+    {
+        change_detection = {
+            -- automatically check for config file changes and reload the ui
+            enabled = true,
+            notify = true, -- get a notification when changes are found
+        },
+    })
 
 -- my keymaps
 safeRequire("core.keymaps")
