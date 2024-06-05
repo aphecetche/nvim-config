@@ -38,4 +38,18 @@ return {
         end,
         config = require("plugins.lsp.diagnostics").config
     },
+    {
+        -- https://github.com/p00f/clangd_extensions.nvim
+        "p00f/clangd_extensions.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        -- The `filetypes` come from the default `filetypes` specified for
+        -- `clangd` in `lspconfig` documentation
+        ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+        opts = {
+            inlay_hints = {
+                only_current_line = true,
+                only_current_line_autocmd = { "CursorHold" },
+            },
+        },
+    },
 }

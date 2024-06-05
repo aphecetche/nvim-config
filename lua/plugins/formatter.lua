@@ -9,6 +9,10 @@ local function setup(opts)
             typescriptreact = {
                 require("formatter.filetypes.typescriptreact").prettierd
             },
+            -- go = {
+            --     require("formatter.filetypes.go").gofmt,
+            --     require("formatter.filetypes.go").goimports
+            -- }
         }
     })
     vim.api.nvim_create_autocmd("BufWritePost", {

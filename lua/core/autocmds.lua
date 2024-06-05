@@ -37,6 +37,26 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --:nnoremap <leader>m :silent !open -a Marked\ 2.app '%:p'<cr>
 
+-- colors
+
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+--     callback = function()
+--         vim.cmd.match([[ExtraWhitespace /\s\+$/]])
+--         --        vim.cmd.match([[Tab /\t/]])
+--     end
+-- })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = function()
+        vim.opt.colorcolumn = "80"
+
+        vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#5b595d" })
+        vim.api.nvim_set_hl(0, "ExtraWhitespace", { bg = "red" })
+        vim.api.nvim_set_hl(0, "Tab", { bg = "red" })
+        vim.cmd.match([[ExtraWhitespace /\s\+$/]])
+        vim.cmd([[2match Tab /\t/]])
+    end
+})
 -- LSP keymapping
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -69,7 +89,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client.server_capabilities.documentFormattingProvider then
             -- print(vim.fn.printf("setting up formatting for %s (buffer %s)", client.name, bufname))
-            if not string.match(string.lower(bufname), "km3net") then
+            if not string.match(string.lower(bufname), "jpp") and not string.match(string.lower(bufname), "km3net-dataformat") then
                 -- print(vim.fn.printf("setting up save on write for buffer %s", bufname))
                 local FormatOnWriteGroup = vim.api.nvim_create_augroup("FormatOnWriteGroup", { clear = true })
                 -- create format on write autocmd only if LSP server actually support formatting

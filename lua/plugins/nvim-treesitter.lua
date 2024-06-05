@@ -16,6 +16,7 @@ return {
             "tsx",
             "typescript",
             "yaml",
+            "vimdoc"
         },
         highlight = {
             enable = true,
