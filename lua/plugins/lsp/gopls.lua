@@ -14,6 +14,8 @@ return {
         --  if client.supports_method("textDocument/formatting") then
         -- vim.keymap.set('n', '<leader>zz', "<cmd>ZZ<CR>", { buffer = true })
         --  end
+        -- highlight Tab guibg=none
+        vim.cmd.highlight("Tab guibg=none")
         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
         vim.api.nvim_create_autocmd("BufWritePre", {
             group = augroup,
