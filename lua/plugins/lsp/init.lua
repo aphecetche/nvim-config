@@ -9,11 +9,12 @@ local lspServers = {
     "marksman",
     "pylsp",
     "fortls",
-    "cssls"
+    "cssls",
+    "vhdl_ls"
 }
 
 return {
-    { -- package manager
+    {     -- package manager
         "williamboman/mason.nvim",
         opts = {
             ui = {
@@ -22,17 +23,17 @@ return {
             },
         },
     },
-    { -- auto-install lsp servers
+    {     -- auto-install lsp servers
         "williamboman/mason-lspconfig.nvim",
         --  event = "VeryLazy",
         dependencies = "williamboman/mason.nvim",
         opts = { ensure_installed = lspServers },
     },
-    { -- configure LSPs
+    {     -- configure LSPs
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         priority = 1000,
-        dependencies = "folke/neodev.nvim", -- lsp for nvim-lua config
+        dependencies = "folke/neodev.nvim",         -- lsp for nvim-lua config
         init = function()
             require("plugins.lsp.setup").setup(lspServers)
         end,
