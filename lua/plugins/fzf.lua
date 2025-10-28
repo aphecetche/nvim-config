@@ -37,12 +37,9 @@ M.config = function()
     -- require('fzf-lua').setup({ "telescope", opts })
     local wk = require("which-key")
     local fzf = require("fzf-lua")
-    wk.register({
-        g = {
-            name = "+git",
-            s = { fzf.git_status, "git status" },
-        },
-    }, { prefix = "<leader>" })
+    wk.add({
+    { "<leader>g", group = "git" },
+    { "<leader>gs", fzf.git_status, desc = "git status" }})
 end
 
 return M

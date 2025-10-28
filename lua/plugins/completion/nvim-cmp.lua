@@ -15,8 +15,9 @@ M.opts = function()
         print("setup_cmp")
         local cmp = require("cmp")
         return {
-                completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
+                completion = { completeopt = "menu,menuone,noinsert,noselect", keyword_length = 1 },
                 experimental = { native_menu = false, ghost_text = false },
+                preselect = cmp.PreselectMode.None, -- 🔑 disables preselection of first item
 
                 snippet = {
                         expand = function(args)
@@ -34,7 +35,7 @@ M.opts = function()
                         ["<C-e>"] = cmp.mapping.abort(),
                         -- Accept currently selected item.
                         -- Set `select` to `false` to only confirm explicitly selected items.
-                        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                        ["<CR>"] = cmp.mapping.confirm({ select = false }),
                 }),
                 sources = cmp.config.sources({
                         { name = "path" },
