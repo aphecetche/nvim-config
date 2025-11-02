@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 local bufname = vim.api.nvim_buf_get_name(0)
 
                 if client:supports_method('textDocument/completion') then
-                        vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+                        vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = false })
                 end
 
                 if client.name == 'clangd' then
