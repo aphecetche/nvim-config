@@ -1,1 +1,0 @@
-WARNING: all the lua files in this `plugins` directory *must* return a [plugin spec](https://github.com/folke/lazy.nvim#-plugin-spec). All those plugin specs will be automatically *merged* by [lazy.nvim](https://github.com/folke/lazy.nvim).

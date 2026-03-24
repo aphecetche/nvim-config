@@ -1,6 +1,0 @@
-{
-        "workspace.checkThirdParty": false,
-        "globals": [
-                "vim"
-        ]
-}
