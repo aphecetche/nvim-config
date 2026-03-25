@@ -1,0 +1,28 @@
+{
+  "plugins": {
+    "conform.nvim": {
+      "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
+      "src": "https://github.com/stevearc/conform.nvim.git"
+    },
+    "fzf-lua": {
+      "rev": "3b01dc83a893749f5ae4639f1aa0af523821840a",
+      "src": "https://github.com/ibhagwan/fzf-lua.git"
+    },
+    "mason.nvim": {
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "src": "https://github.com/mason-org/mason.nvim.git"
+    },
+    "monokai-pro.nvim": {
+      "rev": "d8884d4473667c48bd17a68d08383d38839136a3",
+      "src": "https://github.com/loctvl842/monokai-pro.nvim.git"
+    },
+    "nvim-tree.lua": {
+      "rev": "3d385d3346e4883d60dc37cf642bd47bed78a46e",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua.git"
+    },
+    "nvim-web-devicons": {
+      "rev": "d7462543c9e366c0d196c7f67a945eaaf5d99414",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons.git"
+    }
+  }
+}
