@@ -1,0 +1,12 @@
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	desc = "Markdown keymaps",
+-- 	callback = function(args)
+-- 		if args.match == "markdown" then
+-- 			local wk = require("which-key")
+-- 			wk.add({
+-- 				{ "<leader>m", group = "Markdown" },
+-- 				{ "<leader>mv", "<cmd>silent !open -a Marked\\ 2.app '%:p'<cr>", desc = "Open in Marked 2" },
+-- 			})
+-- 		end
+-- 	end,
+-- })

@@ -14,7 +14,8 @@
 └── README.md
 ```
 
-Note that the lua files under `plugin` (singular) are executed by default by Neovim, in alphabetical order.
+Note that the lua files under `plugin` (singular) are executed by default by
+Neovim, in alphabetical order.
 
 ## References
 
