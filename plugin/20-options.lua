@@ -1,11 +1,4 @@
--- vim.opt.number = true -- show line numbers
--- vim.opt.tabstop = 4 -- number of visual spaces per TAB (\t)
--- vim.opt.expandtab = true -- TABs are spaces
--- vim.opt.ignorecase = true -- case insensitive search
--- vim.opt.smartcase = true -- case-sensitive if expression contains a capital letter
--- vim.opt.clipboard = "unnamedplus" -- always yank into system clipboard
--- vim.opt.path:append(vim.fn.getcwd() .. "/**")
--- vim.opt.list = true
+vim.opt.list = true
 
 -- ============================================================================
 -- OPTIONS
@@ -46,9 +39,9 @@ vim.opt.fillchars = { eob = " " } -- hide "~" on empty lines
 
 local undodir = vim.fn.expand("~/.vim/undodir")
 if
-	vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
+    vim.fn.isdirectory(undodir) == 0 -- create undodir if nonexistent
 then
-	vim.fn.mkdir(undodir, "p")
+    vim.fn.mkdir(undodir, "p")
 end
 
 vim.opt.backup = false -- do not create a backup file
